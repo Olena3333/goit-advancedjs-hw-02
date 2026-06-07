@@ -1,94 +1,185 @@
-Homework 02 — Asynchronous JavaScript & Promises This repository contains the
-homework for Topic 4: Asynchronous JavaScript and Promises. The project is built
-with Vite and includes two exercises implemented as separate pages:
+# Homework 02 — Asynchronous JavaScript & Promises
 
-1-timer.html — Countdown Timer (uses flatpickr and iziToast) 2-snackbar.html —
-Promise generator + notifications (uses iziToast) This README summarizes the
-tasks, acceptance criteria, and how to run the project locally.
+**Author:** Olena Solonikova
 
-Checklist (what this repo implements) A Vite-based project scaffold. A countdown
-timer with date/time picker and formatted display. A promise generator that
-resolves or rejects after a delay and shows toast notifications. Uses flatpickr
-for date selection and iziToast for user messages. Setup Install dependencies:
-npm install Start the development server: npm run dev Open the app in your
-browser: http://localhost:5173
+This project contains the homework assignment for **Topic 4: Asynchronous JavaScript & Promises**. It is built with **Vite** and consists of two independent pages demonstrating asynchronous operations, timers, and promise handling.
 
-Task 1 — Countdown Timer (1-timer.html) Goal: implement a countdown timer that
-counts down to a user-selected date and time.
+## Project Overview
 
-Key UI elements (to be present in 1-timer.html):
+The repository includes:
 
-An input: <input type="text" id="datetime-picker" /> for date/time. A start
-button: <button type="button" data-start>Start</button> (disabled until a valid
-future date is selected). Timer fields showing days, hours, minutes, seconds
-using data-\* attributes (data-days, data-hours, data-minutes, data-seconds).
-Requirements and behavior:
+* **1-timer.html** — Countdown Timer built with **flatpickr** and **iziToast**.
+* **2-snackbar.html** — Promise Generator that creates delayed promises and displays notifications using **iziToast**.
 
-Use flatpickr to select date/time. Import both the library and its CSS. When the
-picker closes, validate the selected date: If it's in the past, show a message
-(use iziToast) saying "Please choose a date in the future" and keep the Start
-button disabled. If it's in the future, enable the Start button. Clicking Start
-begins the countdown (updates every second) and disables the input and Start
-button to prevent changing the date while running. The timer displays remaining
-time as days:hours:minutes:seconds. Days may have more than two digits;
-hours/minutes/seconds must be two-digit with a leading zero when needed (use
-padStart or an addLeadingZero helper). When remaining time reaches zero the
-timer stops, the display shows 00:00:00:00, the input becomes enabled again, and
-Start remains disabled. Use the provided convertMs(ms) function to compute
-days/hours/minutes/seconds from milliseconds. Acceptance criteria (what the
-mentor will check):
+---
 
-flatpickr and iziToast are integrated (including their CSS imports). Start
-button is disabled on initial load and until a valid future date is selected.
-Choosing a past date shows the "Please choose a date in the future" notification
-and keeps Start disabled. Choosing a future date enables Start. Clicking Start
-disables input and Start, starts the countdown, updates the display every
-second, and stops at 00:00:00:00. Helpful hints:
+## Features
 
-Import flatpickr and its CSS: import flatpickr from 'flatpickr'; import
-'flatpickr/dist/flatpickr.min.css'; Import iziToast and its CSS: import iziToast
-from 'izitoast'; import 'izitoast/dist/css/iziToast.min.css'; Task 2 — Promise
-Generator (2-snackbar.html) Goal: build a small UI that creates promises that
-either resolve or reject after a user-specified delay and shows notifications
-for each outcome.
+* Vite-powered project setup.
+* Interactive countdown timer with date and time selection.
+* Promise generator with configurable delay and result state.
+* Toast notifications for user feedback.
+* Integration of **flatpickr** and **iziToast** libraries.
 
-Key UI elements (to be present in 2-snackbar.html):
+---
 
-A form with a numeric input for delay in milliseconds:
-<input type="number" name="delay" required />. Two radio buttons for the desired
-result: fulfilled or rejected. A submit button to create the notification.
-Behavior and requirements:
+## Getting Started
 
-On form submit, create a promise that either resolves or rejects after the
-specified delay (use setTimeout). The promise's resolved/rejected value should
-be the delay in milliseconds. Handle the promise outcome and show a toast
-notification using iziToast: On success: show a message like ✅ Fulfilled
-promise in ${delay}ms. On failure: show a message like ❌ Rejected promise in
-${delay}ms. Acceptance criteria:
+Install project dependencies:
 
-iziToast is integrated (including CSS import). Submitting the form with a delay
-and chosen state triggers a notification with the correct text and timing. Notes
-about coding and quality Keep code readable and modular. Use small helper
-functions (for example, convertMs, addLeadingZero, and a helper to create the
-delayed promise). Format code with Prettier and ensure the console shows no
-errors or warnings when the page loads. Add basic keyboard accessibility where
-it makes sense (focus states, keyboard activation for the Start button, etc.).
-Deployment Before building for GitHub Pages, set the --base option in
-package.json's build script to --base=/<REPO>/ where <REPO> is your repository
-name:
+```bash
+npm install
+```
 
-"build": "vite build --base=/<REPO>/", Then run:
+Start the development server:
 
-npm run build Push to main and the GitHub Actions workflow (if configured)
-should deploy the gh-pages branch automatically.
+```bash
+npm run dev
+```
 
-Live demo: https://olena3333.github.io/goit-advancedjs-hw-02/
+Open your browser and navigate to:
 
-Quick manual check (smoke test) Start dev server: npm run dev. Open 1-timer.html
-and verify the Start button is disabled until you choose a future date. Choose a
-future date and click Start — confirm the countdown updates each second and
-stops at zero. Open 2-snackbar.html, enter a delay (e.g. 1500), choose Fulfilled
-or Rejected, and submit — confirm the appropriate toast appears after the
-specified delay. If you want, I can also add a short README section showing
-where to find the task-related JS modules and small usage examples for the two
-pages.
+```
+http://localhost:5173
+```
+
+---
+
+# Task 1 — Countdown Timer
+
+The first page implements a countdown timer that tracks the remaining time until a selected future date.
+
+## Interface
+
+The page contains:
+
+* A date/time input field.
+* A **Start** button.
+* Countdown elements displaying:
+
+  * Days
+  * Hours
+  * Minutes
+  * Seconds
+
+The timer values are updated through `data-*` attributes.
+
+## Functionality
+
+* The date picker is implemented using **flatpickr**.
+* The **Start** button is disabled until the user selects a valid future date.
+* Selecting a past date triggers an **iziToast** notification:
+
+```
+Please choose a date in the future
+```
+
+* When the timer starts:
+
+  * the input field becomes disabled;
+  * the Start button becomes inactive;
+  * the countdown updates every second.
+
+* Once the countdown reaches zero:
+
+  * the timer stops automatically;
+  * the display shows `00:00:00:00`;
+  * the input field becomes available again;
+  * the Start button remains disabled until another valid date is selected.
+
+Milliseconds are converted into days, hours, minutes, and seconds using the provided `convertMs()` helper.
+
+---
+
+# Task 2 — Promise Generator
+
+The second page demonstrates asynchronous operations with JavaScript Promises.
+
+## Interface
+
+The form contains:
+
+* A numeric input for delay in milliseconds.
+* Two radio buttons:
+
+  * **Fulfilled**
+  * **Rejected**
+* A submit button.
+
+## Functionality
+
+After submission:
+
+* A Promise is created.
+* `setTimeout()` delays its execution.
+* Depending on the selected option, the Promise either resolves or rejects.
+
+After completion, an **iziToast** notification appears.
+
+Success example:
+
+```
+✅ Fulfilled promise in 1500ms
+```
+
+Failure example:
+
+```
+❌ Rejected promise in 1500ms
+```
+
+---
+
+# Code Quality
+
+The project follows several development principles:
+
+* Clean and modular structure.
+* Reusable helper functions.
+* Consistent formatting with Prettier.
+* No console errors or warnings during execution.
+* Basic accessibility support for interactive elements.
+
+---
+
+# Deployment
+
+Before deploying to GitHub Pages, configure the build script in `package.json`:
+
+```json
+"build": "vite build --base=/goit-advancedjs-hw-02/"
+```
+
+Then execute:
+
+```bash
+npm run build
+```
+
+Push the latest changes to the `main` branch. If GitHub Actions is configured, deployment to `gh-pages` will happen automatically.
+
+---
+
+## Live Demo
+
+https://olena3333.github.io/goit-advancedjs-hw-02/
+
+---
+
+# Quick Test Checklist
+
+### Countdown Timer
+
+* Run `npm run dev`.
+* Open `1-timer.html`.
+* Verify that the **Start** button is disabled initially.
+* Select a future date and start the timer.
+* Confirm that the countdown updates every second and stops at zero.
+
+### Promise Generator
+
+* Open `2-snackbar.html`.
+* Enter a delay value (for example `1500`).
+* Choose either **Fulfilled** or **Rejected**.
+* Submit the form and verify that the corresponding notification appears after the specified delay.
+
