@@ -1,6 +1,6 @@
 .home-subtitle {
     text-align: center;
-    color: #747bff;
+    color: #f20e0e;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.18em;
@@ -40,7 +40,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background-image: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+    background-image: linear-gradient(120deg, #f22020 30%, #eee825);
 }
 
 .task-card:hover {
@@ -74,7 +74,7 @@
     align-self: flex-end;
     margin-top: 20px;
     font-size: 24px;
-    color: #4e75ff;
+    color: #f73131;
     transition: transform 250ms ease;
 }
 

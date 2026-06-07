@@ -60,12 +60,12 @@ form button {
     padding: 8px 16px;
     width: 360px;
     height: 40px;
-    background-color: #4e75ff;
+    background-color: #ef1c1c;
     color: #fff;
     margin-left: 0;
     transition: background-color 250ms linear;
 }
 
 form button:hover {
-    background-color: #6c8cff;
+    background-color: #ef3131;
 }
