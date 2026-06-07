@@ -1,113 +1,94 @@
-# Vanilla App Template
+Homework 02 — Asynchronous JavaScript & Promises This repository contains the
+homework for Topic 4: Asynchronous JavaScript and Promises. The project is built
+with Vite and includes two exercises implemented as separate pages:
 
-Цей проект було створено за допомогою Vite. Для знайомства та налаштування
-додаткових можливостей [звернись до документації](https://vitejs.dev/).
+1-timer.html — Countdown Timer (uses flatpickr and iziToast) 2-snackbar.html —
+Promise generator + notifications (uses iziToast) This README summarizes the
+tasks, acceptance criteria, and how to run the project locally.
 
-## Створення репозиторію за шаблоном
+Checklist (what this repo implements) A Vite-based project scaffold. A countdown
+timer with date/time picker and formatted display. A promise generator that
+resolves or rejects after a delay and shows toast notifications. Uses flatpickr
+for date selection and iziToast for user messages. Setup Install dependencies:
+npm install Start the development server: npm run dev Open the app in your
+browser: http://localhost:5173
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення
-репозиторію свого проекту. Для цього натисни на кнопку `«Use this template»` і
-обери опцію `«Create a new repository»`, як показано на зображенні.
+Task 1 — Countdown Timer (1-timer.html) Goal: implement a countdown timer that
+counts down to a user-selected date and time.
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+Key UI elements (to be present in 1-timer.html):
 
-На наступному етапі відкриється сторінка створення нового репозиторію. Заповни
-поле його імені, переконайся, що репозиторій публічний, після чого натисни
-кнопку `«Create repository from template»`.
+An input: <input type="text" id="datetime-picker" /> for date/time. A start
+button: <button type="button" data-start>Start</button> (disabled until a valid
+future date is selected). Timer fields showing days, hours, minutes, seconds
+using data-\* attributes (data-days, data-hours, data-minutes, data-seconds).
+Requirements and behavior:
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+Use flatpickr to select date/time. Import both the library and its CSS. When the
+picker closes, validate the selected date: If it's in the past, show a message
+(use iziToast) saying "Please choose a date in the future" and keep the Start
+button disabled. If it's in the future, enable the Start button. Clicking Start
+begins the countdown (updates every second) and disables the input and Start
+button to prevent changing the date while running. The timer displays remaining
+time as days:hours:minutes:seconds. Days may have more than two digits;
+hours/minutes/seconds must be two-digit with a leading zero when needed (use
+padStart or an addLeadingZero helper). When remaining time reaches zero the
+timer stops, the display shows 00:00:00:00, the input becomes enabled again, and
+Start remains disabled. Use the provided convertMs(ms) function to compute
+days/hours/minutes/seconds from milliseconds. Acceptance criteria (what the
+mentor will check):
 
-Після того, як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як показано
-на зображенні.
+flatpickr and iziToast are integrated (including their CSS imports). Start
+button is disabled on initial load and until a valid future date is selected.
+Choosing a past date shows the "Please choose a date in the future" notification
+and keeps Start disabled. Choosing a future date enables Start. Clicking Start
+disables input and Start, starts the countdown, updates the display every
+second, and stops at 00:00:00:00. Helpful hints:
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+Import flatpickr and its CSS: import flatpickr from 'flatpickr'; import
+'flatpickr/dist/flatpickr.min.css'; Import iziToast and its CSS: import iziToast
+from 'izitoast'; import 'izitoast/dist/css/iziToast.min.css'; Task 2 — Promise
+Generator (2-snackbar.html) Goal: build a small UI that creates promises that
+either resolve or reject after a user-specified delay and shows notifications
+for each outcome.
 
-Проскроливши сторінку до самого кінця, в секції `«Workflow permissions»` обери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це необхідно
-для автоматизації процесу деплою проекту.
+Key UI elements (to be present in 2-snackbar.html):
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+A form with a numeric input for delay in milliseconds:
+<input type="number" name="delay" required />. Two radio buttons for the desired
+result: fulfilled or rejected. A submit button to create the notification.
+Behavior and requirements:
 
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів та папок
-репозиторію-шаблону. Далі працюй з ним, як з будь-яким іншим особистим
-репозиторієм, клонуй його собі на комп'ютер, пиши код, роби коміти та відправляй
-їх на GitHub.
+On form submit, create a promise that either resolves or rejects after the
+specified delay (use setTimeout). The promise's resolved/rejected value should
+be the delay in milliseconds. Handle the promise outcome and show a toast
+notification using iziToast: On success: show a message like ✅ Fulfilled
+promise in ${delay}ms. On failure: show a message like ❌ Rejected promise in
+${delay}ms. Acceptance criteria:
 
-## Підготовка до роботи
+iziToast is integrated (including CSS import). Submitting the form with a delay
+and chosen state triggers a notification with the correct text and timing. Notes
+about coding and quality Keep code readable and modular. Use small helper
+functions (for example, convertMs, addLeadingZero, and a helper to create the
+delayed promise). Format code with Prettier and ensure the console shows no
+errors or warnings when the page loads. Add basic keyboard accessibility where
+it makes sense (focus states, keyboard activation for the Start button, etc.).
+Deployment Before building for GitHub Pages, set the --base option in
+package.json's build script to --base=/<REPO>/ where <REPO> is your repository
+name:
 
-1. Переконайся, що на комп'ютері встановлено LTS-версію Node.js.
-   [Скачай та встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проекту в терміналі командою `npm install`.
-3. Запусти режим розробки, виконавши в терміналі команду `npm run dev`.
-4. Перейдіть у браузері за адресою
-   [http://localhost:5173](http://localhost:5173). Ця сторінка буде автоматично
-   перезавантажуватись після збереження змін у файли проекту.
+"build": "vite build --base=/<REPO>/", Then run:
 
-## Файли і папки
+npm run build Push to main and the GitHub Actions workflow (if configured)
+should deploy the gh-pages branch automatically.
 
-- Файли розмітки компонентів сторінки повинні лежати в папці `src/partials` та
-  імпортуватись до файлу `index.html`. Наприклад, файл з розміткою хедера
-  `header.html` створюємо у папці `partials` та імпортуємо в `index.html`.
-- Файли стилів повинні лежати в папці `src/css` та імпортуватись до HTML-файлів
-  сторінок. Наприклад, для `index.html` файл стилів називається `index.css`.
-- Зображення додавай до папки `src/img`. Збирач оптимізує їх, але тільки при
-  деплої продакшн версії проекту. Все це відбувається у хмарі, щоб не
-  навантажувати твій комп'ютер, тому що на слабких компʼютерах це може зайняти
-  багато часу.
+Live demo: https://innaivboiko.github.io/goit-advancedjs-hw-02/
 
-## Деплой
-
-Продакшн версія проекту буде автоматично збиратися та деплоїтись на GitHub
-Pages, у гілку `gh-pages`, щоразу, коли оновлюється гілка `main`. Наприклад,
-після прямого пуша або прийнятого пул-реквесту. Для цього необхідно у файлі
-`package.json` змінити значення прапора `--base=/<REPO>/`, для команди `build`,
-замінивши `<REPO>` на назву свого репозиторію, та відправити зміни на GitHub.
-
-```json
-"build": "vite build --base=/<REPO>/",
-```
-
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) та
-виставити роздачу продакшн версії файлів з папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
-
-![GitHub Pages settings](./assets/repo-settings.png)
-
-### Статус деплою
-
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
-
-- **Жовтий колір** - виконується збірка та деплой проекту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, збірки чи деплою сталася помилка.
-
-Більш детальну інформацію про статус можна переглянути натиснувши на іконку, і в
-вікні, що випадає, перейти за посиланням `Details`.
-
-![Deployment status](./assets/deploy-status.png)
-
-### Жива сторінка
-
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися за
-адресою, вказаною на вкладці `Settings` > `Pages` в налаштуваннях репозиторію.
-Наприклад, ось посилання на живу версію для цього репозиторію
-
-[https://goitacademy.github.io/vanilla-app-template/](https://goitacademy.github.io/vanilla-app-template/).
-
-Якщо відкриється порожня сторінка, переконайся, що у вкладці `Console` немає
-помилок пов'язаних з неправильними шляхами до CSS та JS файлів проекту
-(**404**). Швидше за все у тебе неправильне значення прапора `--base` для
-команди `build` у файлі `package.json`.
-
-## Як це працює
-
-![How it works](./assets/how-it-works.png)
-
-1. Після кожного пуша у гілку `main` GitHub-репозиторію, запускається
-   спеціальний скрипт (GitHub Action) із файлу `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується та
-   проходить лінтинг та збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн версія файлів проекту
-   відправляється у гілку `gh-pages`. В іншому випадку, у лозі виконання скрипта
-   буде вказано в чому проблема.
+Quick manual check (smoke test) Start dev server: npm run dev. Open 1-timer.html
+and verify the Start button is disabled until you choose a future date. Choose a
+future date and click Start — confirm the countdown updates each second and
+stops at zero. Open 2-snackbar.html, enter a delay (e.g. 1500), choose Fulfilled
+or Rejected, and submit — confirm the appropriate toast appears after the
+specified delay. If you want, I can also add a short README section showing
+where to find the task-related JS modules and small usage examples for the two
+pages.
