@@ -82,7 +82,7 @@ name:
 npm run build Push to main and the GitHub Actions workflow (if configured)
 should deploy the gh-pages branch automatically.
 
-Live demo: https://innaivboiko.github.io/goit-advancedjs-hw-02/](https://olena3333.github.io/goit-advancedjs-hw-02/)
+Live demo: https://olena3333.github.io/goit-advancedjs-hw-02/
 
 Quick manual check (smoke test) Start dev server: npm run dev. Open 1-timer.html
 and verify the Start button is disabled until you choose a future date. Choose a
